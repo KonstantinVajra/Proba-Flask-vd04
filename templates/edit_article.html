@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}{{ action }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ action }}</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.title.label(class="form-label") }}
+            {{ form.title(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.image.label(class="form-label") }}
+            {{ form.image(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.content.label(class="form-label") }}
+            {{ form.content(class="form-control") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.full_content.label(class="form-label") }}
+            {{ form.full_content(class="form-control", id="full_content") }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">💾 Сохранить</button>
+    </form>
+</div>
+
+<!-- Подключаем CKEditor -->
+<script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('full_content', {
+        height: 400,
+        toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', 'RemoveFormat'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', 'Blockquote'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'insert', items: ['Image', 'Table'] },
+            { name: 'styles', items: ['Format', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] },
+            { name: 'tools', items: ['Maximize'] }
+        ],
+        removeButtons: 'Subscript,Superscript',
+        extraPlugins: 'autogrow',
+        autoGrow_minHeight: 200,
+        autoGrow_maxHeight: 600
+    });
+</script>
+{% endblock %}

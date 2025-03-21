@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">{{ article.title }}</h1>
+
+    <!-- Изображение статьи -->
+    <img src="{{ url_for('static', filename='images/' + article.image) }}"
+         class="img-fluid rounded my-3 d-block mx-auto"
+         style="max-width: 500px; display: block; margin: 0 auto;"
+         alt="{{ article.title }}">
+
+    <!-- Основное содержание статьи -->
+<div class="article-content mt-4">
+    {{ article.full_content | safe }}
+</div>
+
+
+    <!-- Кнопка "Назад" -->
+    <a href="{{ url_for('blog') }}" class="btn btn-secondary mt-3">⬅️ Назад к статьям</a>
+</div>
+{% endblock %}
